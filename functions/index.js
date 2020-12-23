@@ -45,6 +45,8 @@ exports.getAirmen = functions.https.onRequest(rt);
 
 rt.post('/:id', async (req, res) => {
   Cors(req, res, async () => {
+    res.set('Access-Control-Allow-Origin', "*")
+    res.set('Access-Control-Allow-Methods', 'POST')
     const newAirman = req.body;
     await db.collection('squadron').doc(req.params.id).collection('airmen').add(newAirman);
     res.status(201).send({result: "User added succefully"});
